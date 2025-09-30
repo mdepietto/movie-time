@@ -1,4 +1,5 @@
 import { IMAGE_URL_BASE } from '../data/data';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -21,13 +22,15 @@ const Wrapper = styled.div`
 // TODO: add hover and click animations
 const MovieCard = ({ title, id, posterPath }) => {
   return (
-    <Wrapper>
-      <img
-        src={`${IMAGE_URL_BASE}${posterPath}`}
-        alt={`${title}-movie poster`}
-      />
-      <h3>{title}</h3>
-    </Wrapper>
+    <Link to={`/movie/${id}`}>
+      <Wrapper>
+        <img
+          src={`${IMAGE_URL_BASE}${posterPath}`}
+          alt={`${title}-movie poster`}
+        />
+        <h3>{title}</h3>
+      </Wrapper>
+    </Link>
   );
 };
 

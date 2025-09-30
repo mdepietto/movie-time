@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import TrendingMovies from './components/TrendingMovies';
+import MovieDetails from './components/MovieDetails';
 
 const TRENDING_MOVIES_ENDPOINT = 'trending_movies';
 
@@ -39,6 +40,10 @@ function App() {
         <Route
           path={`/${TRENDING_MOVIES_ENDPOINT}`}
           element={<TrendingMovies trendingMoviesData={trendingMoviesData} />}
+        />
+        <Route
+          path='/movie/:movie_id'
+          element={<MovieDetails />}
         />
       </Routes>
     </BrowserRouter>

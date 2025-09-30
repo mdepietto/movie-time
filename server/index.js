@@ -48,7 +48,26 @@ app.get('/trending_movies', async (req, res) => {
   }
 });
 
+app.get('/movie/:movie_id', async (req, res) => {
+  const { params: { movie_id: movieId } } = req
 
+  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=en-US`
+
+  try {
+    const response = await fetch(movieDetailsUrl, options)
+
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    res.json(data)
+  }
+  catch (error) {
+    console.error(error)
+  }
+})
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
