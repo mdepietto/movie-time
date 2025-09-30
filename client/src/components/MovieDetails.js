@@ -73,6 +73,8 @@ const MovieDetails = () => {
     catch (error) {
       console.error(error);
     }
+
+    localStorage.setItem('test', 'something')
   }
 
   return (

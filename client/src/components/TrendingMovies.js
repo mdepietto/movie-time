@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import MovieCard from "./MovieCard";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -10,7 +11,30 @@ const Wrapper = styled.div`
   max-width: 40rem;
 `;
 
-const TrendingMovies = ({ trendingMoviesData }) => {
+const TrendingMovies = () => {
+  const [trendingMoviesData, setTrendingMoviesData] = useState();
+
+  const fetchTrendingMovies = async () => {
+    try {
+    const response = await fetch('http://localhost:4040/trending_movies')
+
+      if (!response.ok) {
+        throw new Error('Trending movies could not be fetched from the server')
+      }
+
+      const data = await response.json()
+      
+      setTrendingMoviesData(data)
+    }
+    catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(() => {
+    fetchTrendingMovies()
+  }, [])
+  
   if (!trendingMoviesData) return 'Loading...';
 
   return (
