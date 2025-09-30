@@ -1,34 +1,47 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import TrendingMovies from './components/TrendingMovies';
+
+const TRENDING_MOVIES_ENDPOINT = 'trending_movies';
 
 function App() {
-  const [mockData, setMockData] = useState();
+  const [trendingMoviesData, setTrendingMoviesData] = useState();
 
-  const mockFetch = async () => {
+  const fetchTrendingMovies = async () => {
     try {
-      const response = await fetch('http://localhost:4040/')
+      const response = await fetch(`http://localhost:4040/${TRENDING_MOVIES_ENDPOINT}`)
 
       if (!response.ok) {
-        throw new Error('Mock data could not be fetched');
+        throw new Error('Trending movies could not be fetched from the server')
       }
 
       const data = await response.json()
-
-      setMockData(data);
+      
+      setTrendingMoviesData(data)
     }
-
     catch (error) {
-      console.error(error);
+      console.error(error)
     }
   }
 
   useEffect(() => {
-    mockFetch();
+    fetchTrendingMovies()
   }, [])
 
   return (
-    <div>
-      {mockData?.message}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path='/'
+          // when visiting the homepage, redirected to a more descriptive url
+          element={<Navigate to={TRENDING_MOVIES_ENDPOINT} replace />}
+        />
+        <Route
+          path={`/${TRENDING_MOVIES_ENDPOINT}`}
+          element={<TrendingMovies trendingMoviesData={trendingMoviesData} />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

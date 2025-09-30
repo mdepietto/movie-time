@@ -13,9 +13,42 @@ app.use(
   })
 )
 
-app.get('/', async (req, res) => {
-  res.json({ message: 'hello there' });
+const BASE_URL = 'https://api.themoviedb.org/3'
+
+// standard options for get request
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${process.env.TMDB_READ_TOKEN}`
+  }
+};
+
+// Home Route that makes trending movie api call
+app.get('/trending_movies', async (req, res) => {
+  // url for trending movies of the week
+  const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US`
+  // EXTRA TODO: add pagination -> prepend &page={num}
+  // const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US&page=2`
+
+  try {
+    const response = await fetch(trendingMoviesUrl, options)
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+
+    const data = await response.json()
+
+    res.json(data)
+  }
+
+  catch (error) {
+    res.status(error);
+  }
 });
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);
