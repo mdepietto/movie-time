@@ -1,5 +1,6 @@
 import MovieCard from "./MovieCard";
 import styled from 'styled-components';
+import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   display: grid;
@@ -14,6 +15,7 @@ const TrendingMovies = ({ trendingMoviesData }) => {
 
   return (
     <Wrapper>
+      <Link to='/movies/favorites'>Favorite Movies</Link>
       {
         trendingMoviesData?.results?.map(({ title, id, poster_path: posterPath }) => {
           return <MovieCard key={id} title={title} id={id} posterPath={posterPath}/>
