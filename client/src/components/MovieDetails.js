@@ -55,6 +55,26 @@ const MovieDetails = () => {
     currency: 'USD',
   }).format(budget);
 
+  const handleFavoriteMovie = async () => {
+    try {
+      const response = await fetch(`http://localhost:4040/favorite_movie/${movieId}`, {
+        method: "POST"
+      });
+
+      if (!response.ok) {
+        throw new Error('Could not save movie as favorite.')
+      }
+  
+      const data = await response.json();
+
+      console.log({ data })
+    }
+
+    catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <Wrapper>
       <Link to={'/'}>Back to Home</Link>
@@ -69,14 +89,10 @@ const MovieDetails = () => {
       />
       <p>Budget: {formattedBudget}</p>
       <p>{overview}</p>
+
+      <button onClick={handleFavoriteMovie}>Save as favorite</button>
     </Wrapper>
   );
 };
-
-// PORT=4040
-
-// TMDB_API_KEY=8b0b2419f50dffe3f8ebcb585261be45
-
-// TMDB_READ_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4YjBiMjQxOWY1MGRmZmUzZjhlYmNiNTg1MjYxYmU0NSIsIm5iZiI6MTc1OTAxMzU4Ni4xMjYwMDAyLCJzdWIiOiI2OGQ4NmFkMjZjYjA5YWVmYTAzOGI4MmEiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.IJDHbz5Eg_to8rkkxZX0UWh4R5H3qBQrP-k5uefp_a0
 
 export default MovieDetails;
