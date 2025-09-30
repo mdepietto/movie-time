@@ -1,13 +1,18 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from "react-router-dom";
+import { IMAGE_URL_BASE } from '../data/data';
+import styled from 'styled-components'
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 40rem;
+`;
 
 const MovieDetails = () => {
   const [movieDetails, setMovieDetails] = useState();
 
   const { movie_id: movieId } = useParams();
-
-  console.log(movieId);
-  
     
   const fetchMovieDetails = async () => {
     try {
@@ -28,13 +33,43 @@ const MovieDetails = () => {
 
   useEffect(() => {
     fetchMovieDetails()
+    // disabled because only want it to call once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (!movieDetails) return 'Loading...';
+
+  const {
+    title,
+    tagline,
+    vote_average: rating,
+    runtime = 0,
+    release_date: releaseDate,
+    poster_path: posterPath,
+    budget,
+    overview,
+  } = movieDetails;
+
+  const formattedBudget = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+  }).format(budget);
+
   return (
-    <div>
+    <Wrapper>
       <Link to={'/'}>Back to Home</Link>
-      {JSON.stringify(movieDetails)}
-    </div>
+      <h3>{title}</h3>
+      <h4>{tagline}</h4>
+      <h3>{rating}/10</h3>
+      <p>{runtime} minutes</p>
+      <h4>Released: {releaseDate}</h4>
+      <img
+        src={`${IMAGE_URL_BASE}${posterPath}`}
+        alt={`${title}-movie poster`}
+      />
+      <p>Budget: {formattedBudget}</p>
+      <p>{overview}</p>
+    </Wrapper>
   );
 };
 
