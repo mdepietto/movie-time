@@ -16,7 +16,7 @@ const TrendingMovies = () => {
 
   const fetchTrendingMovies = async () => {
     try {
-    const response = await fetch('http://localhost:4040/trending_movies')
+      const response = await fetch('http://localhost:4040/trending_movies')
 
       if (!response.ok) {
         throw new Error('Trending movies could not be fetched from the server')
@@ -34,7 +34,7 @@ const TrendingMovies = () => {
   useEffect(() => {
     fetchTrendingMovies()
   }, [])
-  
+
   if (!trendingMoviesData) return 'Loading...';
 
   return (

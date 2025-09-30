@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   max-width: 40rem;
 `;
 
-const MovieDetails = () => {
+const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
   const [movieDetails, setMovieDetails] = useState();
 
   const { movie_id: movieId } = useParams();
@@ -55,31 +55,32 @@ const MovieDetails = () => {
     currency: 'USD',
   }).format(budget);
 
-  const handleFavoriteMovie = async () => {
-    try {
-      const response = await fetch(`http://localhost:4040/favorite_movie/${movieId}`, {
-        method: "POST"
-      });
+  const handleFavorite = () => {
+    let updated;
 
-      if (!response.ok) {
-        throw new Error('Could not save movie as favorite.')
+    if (favoriteMovies) {
+      if (favoriteMovies?.some(fav => fav.id === movieId)) {
+        console.log('already a favorite');
+        
+        updated = favoriteMovies?.filter(fav => fav.id !== movieId);
+      } else {
+        console.log('not already a favorite');
+        
+        updated = [...favoriteMovies, movieDetails];
       }
   
-      const data = await response.json();
-
-      console.log({ data })
+      setFavoriteMovies(updated);
+    } else {
+      updated = [movieDetails]
     }
 
-    catch (error) {
-      console.error(error);
-    }
-
-    localStorage.setItem('test', 'something')
-  }
+    localStorage.setItem("favorites", JSON.stringify(updated));
+  };
 
   return (
     <Wrapper>
       <Link to={'/'}>Back to Home</Link>
+
       <h3>{title}</h3>
       <h4>{tagline}</h4>
       <h3>{rating}/10</h3>
@@ -92,7 +93,9 @@ const MovieDetails = () => {
       <p>Budget: {formattedBudget}</p>
       <p>{overview}</p>
 
-      <button onClick={handleFavoriteMovie}>Save as favorite</button>
+      <button onClick={handleFavorite}>
+        {favoriteMovies?.some(fav => fav.id === Number(movieId)) ? "★" : "☆"}
+      </button>
     </Wrapper>
   );
 };

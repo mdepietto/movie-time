@@ -50,63 +50,13 @@ app.get('/trending_movies', async (req, res) => {
 
 app.get('/movie/:movie_id', async (req, res) => {
   const { params: { movie_id: movieId } } = req
+  console.log({movieId});
+  
 
   const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=en-US`
 
   try {
     const response = await fetch(movieDetailsUrl, getOptions)
-
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`)
-    }
-
-    const data = await response.json()
-
-    res.json(data)
-  }
-  catch (error) {
-    console.error(error)
-  }
-});
-
-app.post('/favorite_movie/:movie_id', async (req, res) => {
-  const { params: { movie_id: movieId } } = req;
-  
-  const favoriteMovieUrl = `${BASE_URL}/account/${process.env.ACCOUNT_ID}/favorite`;
-
-  const postOptions = {
-    method: 'POST',
-    headers: {
-      accept: 'application/json',
-      'content-type': 'application/json',
-      Authorization: `Bearer ${process.env.TMDB_READ_TOKEN}`
-    },
-    body: JSON.stringify({
-      media_type: "movie",
-      media_id: movieId,
-      favorite: true
-    })
-  };
-
-  try {
-    const response = await fetch(favoriteMovieUrl, postOptions)
-
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`)
-    }
-
-    res.json({ status: response.status });
-  }
-  catch (error) {
-    console.error(error)
-  }
-});
-
-app.get('/movies/favorites', async (req, res) => {
-  const favoriteMoviesUrl = `https://api.themoviedb.org/3/account/${process.env.ACCOUNT_ID}/favorite/movies?language=en-US&page=1&sort_by=created_at.asc`
-
-  try {
-    const response = await fetch(favoriteMoviesUrl, getOptions)
 
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status}`)
