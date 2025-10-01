@@ -1,5 +1,6 @@
 ## TO RUN LOCALLY ##
 ### LOCAL INSTALL ###
+(make sure you have Node installed)
 - unzip folder and save wherever you'd like
 - open your IDE of choice
 - open project root folder inside the IDE
