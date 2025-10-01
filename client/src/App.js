@@ -27,7 +27,7 @@ function App() {
         <Route
           path='/trending_movies'
           // passed favoriteMovies to update icons on movie cards
-          element={<TrendingMovies favoriteMovies={favoriteMovies}  />}
+          element={<TrendingMovies favoriteMovies={favoriteMovies} />}
         />
         <Route
           path='/movie/:movie_id'

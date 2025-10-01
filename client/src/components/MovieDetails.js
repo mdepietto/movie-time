@@ -55,7 +55,7 @@ const Details = styled.div`
   }
 
   p {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin: 1rem 0 0 0;
   }
 `;
@@ -179,8 +179,8 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
             <FavoriteButton onClick={toggleFavorite}>
               {favoriteMovies?.some(fav => fav.id === Number(movieId)) ? "★" : "☆"}
             </FavoriteButton>
-            <h3>{rating}/10</h3>
-            <h3>{runtime} minutes</h3>
+            <h3>Rating: {rating}/10</h3>
+            <h3>Runtime: {runtime} minutes</h3>
             <h3>Released: {releaseDate}</h3>
             <h3>Budget: {formattedBudget}</h3>
           </BasicInfo>
