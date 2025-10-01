@@ -28,9 +28,7 @@ const getOptions = {
 app.get('/trending_movies', async (req, res) => {
   // url for trending movies of the week
   const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US`;
-  // EXTRA TODO: add pagination -> prepend &page={num}
-  // const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US&page=2`
-
+  
   try {
     const response = await fetch(trendingMoviesUrl, getOptions);
     

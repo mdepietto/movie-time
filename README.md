@@ -1,3 +1,27 @@
+## TO RUN LOCALLY ##
+### LOCAL INSTALL ###
+- unzip folder and save wherever you'd like
+- open your IDE of choice
+- open project root folder inside the IDE
+- add a `.env` file to the `server` folder
+- in it, add all variables that were included in the final assessment email
+### RUNNING THE APP ###
+- open terminal
+- navigate terminal to `.../optimum-assessment/client`
+- run `npm i`
+- run `npm start`
+- open an additional terminal
+- navigate new terminal to `.../optimum-assessment/server`
+- run `npm i`
+- run `npm start`
+- refresh the browser
+- enjoy the app!
+
+## NAVIGATING THE APP ##
+It starts on the homepage, displaying all trending movies for the week.  Each movie is represented by a movie card with a poster and title.  They are all clickable and navigate to another page displaying the details of the movie.  Each details page has a star which, when clicked, allows you to save the movie to your local storage as a favorite movie.  You can also click it again to remove it from your favorite list.  When navigating to the favorites page, you should see all favorite movies listed with their own cards.  Back on the home page, you should also see a star icon on the top right corner of the movie card, indicating that it is already a favorite.
+
+-------------------------------------------------------------------------------------------
+
 ## DEPENDENCIES INSTALLED
 ### CLIENT
 - react-router-dom
@@ -6,75 +30,16 @@
 - express
 - cors
 - dotenv
+- jest
+
+-------------------------------------------------------------------------------------------
 
 ### MISTAKES
-- `server/.env` was committed with sensitive information
+- `server/.env` was committed with sensitive information (API info)
   - new key/token have been created since
 
-### FUTURE FEATURES
-- Favorite movie indicator on MovieCard on the home page
-- 'Save as favorite' button disabled and text converted to already a favorite in MovieDetails
-- 
 -------------------------------------------------------------------------------------------
-### REQUIREMENTS ###
-[x] Movie List Display:
-  Retrieve and display a list of trending movies from the TMDB API.
-[x] Movie Details Navigation:
-  Implement navigation to a detailed information page for a selected movie using the /movie/{movie_id} endpoint.
-[x] Favorite Movies:
-  Enable users to mark movies as favorites, storing this information
-  locally and ensuring persistence across sessions.
 
-### CACHING (nice to have) ###
-[x] Implement caching for the trending movie lists to ensure movies are
-fetched once and stored locally, improving performance.
-
-### ERROR HANDLING ###
-[x] Gracefully handle API errors by displaying appropriate error
-messages or fallbacks when the network is unavailable, or the API returns an invalid response.
-
-### SOFTWARE ARCHITECTURE ###
-[x] Adhere to SOLID principles and demonstrate sound software
-architecture throughout the implementation.
--------------------------------------------------------------------------
-### GUIDELINES ###
-### DESIGN FLEXIBILITY ###
-[?] Use the provided mocks as guidance and feel free to adapt as
-needed.
-[x] You may use any third-party libraries you deem necessary but
-avoid overuse. Be prepared to explain your choices.
-[x] Ensure that your TMDB API key is securely handled. Avoid
-hardcoding the key in your codebase.
--------------------------------------------------------------------------
-### API ENDPOINTS ###
-[x] Fetch popular or trending movies: '/trending/movie/{day or week}'.
-[x] Fetch movie details: '/movie/{movie_id}'
-
-* Refer to poster path guide for images, "poster_path" in the TMDB API response for each movie to prepend the base URL.
-"https://developer.themoviedb.org/docs/image-basics"
--------------------------------------------------------------------------
-### WORK PACKAGE ###
-[] Send a zip file with the entire project.
-[] A video record with a step-by-step process to setup the program and a quick demo on the program.
--------------------------------------------------------------------------
-### TECH REQUIREMENTS ###
-[x] Application must be developed using React JS, adhering to best practices.
-[] Utilize a modern, declarative approach for building the UI with smooth transitions.
-[x] Application can be developed using one of Node JS / Python / Java / Go (preferred)
--------------------------------------------------------------------------
-### EVALUATION CRITERIA ###
-Required:
-[] The solution compiles successfully. Any additional steps necessary for compilation should be clearly documented in the README.md.
-[] The solution is free from crashes, bugs, and compiler warnings.
-[x] The code follows SOLID principles and demonstrates sound software architecture.
-[x] The code is clear, well-structured, and easy to understand.
-[] Unit testing should be included.
-[x] The commit history is well-organized, consistent, and easy to follow.
--------------------------------------------------------------------------
-### NICE TO HAVE ###
-[x] Caching mechanisms to improve performance.
-
-### HINTS ###
-[x] Keep it as simple as possible!
-[] Be clear in the solution and documentation.
-[] Send any questions you may have, via your recruiter, with your name.
+### FUTURE FEATURES
+- all features are accounted for, except for unit testing
+- would like to add pagination to the trending videos page instead of appending `page=2` in url

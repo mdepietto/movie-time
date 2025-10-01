@@ -19,7 +19,6 @@ const HeaderRow = styled.div`
 
 const Title = styled.h2`
   font-size: 3rem;
-  font-weight: 600;
   color: #ffffffff;
   letter-spacing: -0.5px;
 `;
@@ -36,7 +35,7 @@ const FavoriteMovies = ({ favoriteMovies }) => (
       <Title>Favorite Movies:</Title>
       <StyledLink to='/'>Home</StyledLink>
     </HeaderRow>
-    {(!favoriteMovies || favoriteMovies?.length === 0) && <h3>No favorite movies yet!</h3>}
+    {(!favoriteMovies || favoriteMovies?.length === 0) && <Title>No favorite movies yet!</Title>}
     
     <MoviesWrapper>
       {/* create a movie card for each favorite movie */}

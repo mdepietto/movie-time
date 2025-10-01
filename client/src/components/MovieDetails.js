@@ -186,8 +186,6 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
           </BasicInfo>
 
           <p>{overview}</p>
-
-
         </Details>
       </Content>
     </Wrapper>
