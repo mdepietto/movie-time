@@ -30,7 +30,7 @@
 fetched once and stored locally, improving performance.
 
 ### ERROR HANDLING ###
-[] Gracefully handle API errors by displaying appropriate error
+[x] Gracefully handle API errors by displaying appropriate error
 messages or fallbacks when the network is unavailable, or the API returns an invalid response.
 
 ### SOFTWARE ARCHITECTURE ###
@@ -66,15 +66,15 @@ hardcoding the key in your codebase.
 Required:
 [] The solution compiles successfully. Any additional steps necessary for compilation should be clearly documented in the README.md.
 [] The solution is free from crashes, bugs, and compiler warnings.
-[] The code follows SOLID principles and demonstrates sound software architecture.
-[] The code is clear, well-structured, and easy to understand.
+[x] The code follows SOLID principles and demonstrates sound software architecture.
+[x] The code is clear, well-structured, and easy to understand.
 [] Unit testing should be included.
-[] The commit history is well-organized, consistent, and easy to follow.
+[x] The commit history is well-organized, consistent, and easy to follow.
 -------------------------------------------------------------------------
 ### NICE TO HAVE ###
-[] Caching mechanisms to improve performance.
+[x] Caching mechanisms to improve performance.
 
 ### HINTS ###
-[] Keep it as simple as possible!
+[x] Keep it as simple as possible!
 [] Be clear in the solution and documentation.
 [] Send any questions you may have, via your recruiter, with your name.
