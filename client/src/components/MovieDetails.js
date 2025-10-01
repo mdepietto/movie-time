@@ -20,6 +20,8 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
       const response = await fetch(`http://localhost:4040/movie/${movieId}`)
 
       if (!response.ok) {
+        // set error message to be displayed
+        setMovieDetails({ error: 'Could not access movie details, try again!' });
         throw new Error('Movie details could not be fetched from the server');
       }
 
@@ -37,6 +39,8 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
     // disabled because only want it to call once
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (movieDetails?.error) return `${movieDetails.error}`;
 
   if (!movieDetails) return 'Loading...';
 

@@ -9,6 +9,7 @@
 
 ### MISTAKES
 - `server/.env` was committed with sensitive information
+  - new key/token have been created since
 
 ### FUTURE FEATURES
 - Favorite movie indicator on MovieCard on the home page

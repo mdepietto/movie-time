@@ -26,6 +26,8 @@ const TrendingMovies = ({ favoriteMovies }) => {
         const response = await fetch('http://localhost:4040/trending_movies');
   
         if (!response.ok) {
+          // set error message to be displayed
+          setTrendingMoviesData({ error: 'Could not access trending movies, try again!' });
           throw new Error('CLIENT: Trending movies could not be fetched')
         };
   
@@ -45,7 +47,9 @@ const TrendingMovies = ({ favoriteMovies }) => {
     fetchTrendingMovies()
   }, []);
 
-  if (!trendingMoviesData) return 'Loading...';
+  if (trendingMoviesData?.error) return `${trendingMoviesData.error}`;
+
+  if (!trendingMoviesData?.results) return 'Loading...';
 
   return (
     <Wrapper>
