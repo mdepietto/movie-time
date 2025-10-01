@@ -20,7 +20,7 @@ const Wrapper = styled.div`
 `
 
 // TODO: add hover and click animations
-const MovieCard = ({ title, id, posterPath }) => {
+const MovieCard = ({ title, id, posterPath, favorite }) => {
   return (
     <Link to={`/movie/${id}`}>
       <Wrapper>
@@ -29,6 +29,7 @@ const MovieCard = ({ title, id, posterPath }) => {
           alt={`${title}-movie poster`}
         />
         <h3>{title}</h3>
+        { favorite && <span>★</span> }
       </Wrapper>
     </Link>
   );

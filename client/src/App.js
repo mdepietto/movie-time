@@ -9,16 +9,11 @@ function App() {
 
   useEffect(() => {
     const saved = localStorage.getItem('favorites');
-
-    console.log({ saved });
     
     if (saved) {
       setFavoriteMovies(JSON.parse(saved));
     }
   }, []);
-
-  console.log(favoriteMovies);
-  
   
   return (
     <BrowserRouter>
@@ -30,8 +25,7 @@ function App() {
         />
         <Route
           path='/trending_movies'
-          // TODO: pass 'favoriteMovies' here to display icon
-          element={<TrendingMovies />}
+          element={<TrendingMovies favoriteMovies={favoriteMovies}  />}
         />
         <Route
           path='/movie/:movie_id'

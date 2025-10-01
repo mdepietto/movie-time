@@ -79,7 +79,8 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
 
   return (
     <Wrapper>
-      <Link to={'/'}>Back to Home</Link>
+      <Link to={'/'}>Home</Link>
+      <Link to={'/movies/favorites'}>Favorites</Link>
 
       <h3>{title}</h3>
       <h4>{tagline}</h4>

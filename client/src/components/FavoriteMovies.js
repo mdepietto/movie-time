@@ -11,14 +11,20 @@ const Wrapper = styled.div`
 `;
 
 const FavoriteMovies = ({ favoriteMovies }) => {
-  console.log({favoriteMovies});
-  
   return (
     <Wrapper>
-      <Link to='/'>Back to Home</Link>
+      <Link to='/'>Home</Link>
       {
         favoriteMovies?.map(({ title, id, poster_path: posterPath }) => {
-          return <MovieCard key={id} title={title} id={id} posterPath={posterPath} />
+          return (
+            <MovieCard
+              key={id}
+              title={title}
+              id={id}
+              posterPath={posterPath}
+              favorite
+            />
+          )
         })
       }
     </Wrapper>

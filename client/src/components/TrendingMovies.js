@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   max-width: 40rem;
 `;
 
-const TrendingMovies = () => {
+const TrendingMovies = ({ favoriteMovies }) => {
   const [trendingMoviesData, setTrendingMoviesData] = useState();
 
   const fetchTrendingMovies = async () => {
@@ -42,7 +42,15 @@ const TrendingMovies = () => {
       <Link to='/movies/favorites'>Favorite Movies</Link>
       {
         trendingMoviesData?.results?.map(({ title, id, poster_path: posterPath }) => {
-          return <MovieCard key={id} title={title} id={id} posterPath={posterPath}/>
+          return (
+            <MovieCard
+              key={id}
+              title={title}
+              id={id}
+              favorite={favoriteMovies?.some(fav => fav.id === id)}
+              posterPath={posterPath}
+            />
+          )
         })
       }
     </Wrapper>
