@@ -7,11 +7,11 @@
 - in it, add all variables that were included in the final assessment email
 ### RUNNING THE APP ###
 - open terminal
-- navigate terminal to `.../optimum-assessment/client`
+- navigate terminal to `.../movie-time-master/client`
 - run `npm i`
 - run `npm start`
 - open an additional terminal
-- navigate new terminal to `.../optimum-assessment/server`
+- navigate new terminal to `.../movie-time-master/server`
 - run `npm i`
 - run `npm start`
 - refresh the browser
