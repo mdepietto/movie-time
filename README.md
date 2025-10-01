@@ -30,7 +30,6 @@ It starts on the homepage, displaying all trending movies for the week.  Each mo
 - express
 - cors
 - dotenv
-- jest
 
 -------------------------------------------------------------------------------------------
 
