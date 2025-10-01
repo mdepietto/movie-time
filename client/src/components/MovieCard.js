@@ -20,19 +20,19 @@ const Wrapper = styled.div`
 `
 
 // TODO: add hover and click animations
-const MovieCard = ({ title, id, posterPath, favorite }) => {
-  return (
-    <Link to={`/movie/${id}`}>
-      <Wrapper>
-        <img
-          src={`${IMAGE_URL_BASE}${posterPath}`}
-          alt={`${title}-movie poster`}
-        />
-        <h3>{title}</h3>
-        { favorite && <span>★</span> }
-      </Wrapper>
-    </Link>
-  );
-};
+const MovieCard = ({ title, id, posterPath, favorite }) => (
+  <Link to={`/movie/${id}`}>
+    <Wrapper>
+      <img
+        src={`${IMAGE_URL_BASE}${posterPath}`}
+        alt={`${title}-movie poster`}
+      />
+      <h3>{title}</h3>
+      
+      {/* favorite indicator */}
+      { favorite && <span>★</span> }
+    </Wrapper>
+  </Link>
+);
 
 export default MovieCard;

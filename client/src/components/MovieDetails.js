@@ -12,6 +12,7 @@ const Wrapper = styled.div`
 const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
   const [movieDetails, setMovieDetails] = useState();
 
+  // id taken from the params of the frontend url in MovieCard.js
   const { movie_id: movieId } = useParams();
     
   const fetchMovieDetails = async () => {
@@ -29,7 +30,7 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
     catch (error) {
       console.error(error);
     }
-  }
+  };
 
   useEffect(() => {
     fetchMovieDetails()
@@ -50,18 +51,22 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
     overview,
   } = movieDetails;
 
+  // converts to us currency layout
   const formattedBudget = new Intl.NumberFormat('en-US', {
     style: 'currency',
     currency: 'USD',
   }).format(budget);
 
-  const handleFavorite = () => {
+  const toggleFavorite = () => {
     let updated;
 
     if (favoriteMovies) {
+      // if cached favorite movie id matches this movieId
       if (favoriteMovies?.some(fav => fav.id === Number(movieId))) {
+        // remove movie from list
         updated = favoriteMovies?.filter(fav => fav.id !== Number(movieId));
       } else {
+        // otherwise, append it
         updated = [...favoriteMovies, movieDetails];
       }
   
@@ -70,6 +75,7 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
       updated = [movieDetails]
     }
 
+    // set local storage to updated list
     localStorage.setItem("favorites", JSON.stringify(updated));
   };
 
@@ -90,7 +96,7 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
       <p>Budget: {formattedBudget}</p>
       <p>{overview}</p>
 
-      <button onClick={handleFavorite}>
+      <button onClick={toggleFavorite}>
         {favoriteMovies?.some(fav => fav.id === Number(movieId)) ? "★" : "☆"}
       </button>
     </Wrapper>

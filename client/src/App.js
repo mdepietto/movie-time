@@ -7,6 +7,7 @@ import FavoriteMovies from './components/FavoriteMovies';
 function App() {
   const [favoriteMovies, setFavoriteMovies] = useState();
 
+  // sets favoriteMovies to cached values
   useEffect(() => {
     const saved = localStorage.getItem('favorites');
     
@@ -20,11 +21,12 @@ function App() {
       <Routes>
         <Route
           path='/'
-          // when visiting the homepage, redirected to a more descriptive url
+          // when visiting the homepage, redirected to a more descriptive url (/trending_movies)
           element={<Navigate to='/trending_movies' replace />}
         />
         <Route
           path='/trending_movies'
+          // passed favoriteMovies to update icons on movie cards
           element={<TrendingMovies favoriteMovies={favoriteMovies}  />}
         />
         <Route
@@ -38,6 +40,6 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

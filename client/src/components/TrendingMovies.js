@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieCard from "./MovieCard";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -17,31 +17,33 @@ const TrendingMovies = ({ favoriteMovies }) => {
   const fetchTrendingMovies = async () => {
     const cached = localStorage.getItem('trendingMovies');
     
+    // if cache exists, use that value
     if (cached) {
       setTrendingMoviesData(JSON.parse(cached));
+    // otherwise, fetch
     } else {
       try {
-        const response = await fetch('http://localhost:4040/trending_movies')
+        const response = await fetch('http://localhost:4040/trending_movies');
   
         if (!response.ok) {
-          throw new Error('Trending movies could not be fetched from the server')
-        }
+          throw new Error('CLIENT: Trending movies could not be fetched')
+        };
   
-        const data = await response.json()
+        const data = await response.json();
         
-        setTrendingMoviesData(data)
+        setTrendingMoviesData(data);
 
         localStorage.setItem("trendingMovies", JSON.stringify(data));
       }
       catch (error) {
-        console.error(error)
+        console.error(error);
       }
     }
-  }
+  };
 
   useEffect(() => {
     fetchTrendingMovies()
-  }, [])
+  }, []);
 
   if (!trendingMoviesData) return 'Loading...';
 
@@ -49,17 +51,15 @@ const TrendingMovies = ({ favoriteMovies }) => {
     <Wrapper>
       <Link to='/movies/favorites'>Favorite Movies</Link>
       {
-        trendingMoviesData?.results?.map(({ title, id, poster_path: posterPath }) => {
-          return (
-            <MovieCard
-              key={id}
-              title={title}
-              id={id}
-              favorite={favoriteMovies?.some(fav => fav.id === id)}
-              posterPath={posterPath}
-            />
-          )
-        })
+        trendingMoviesData?.results?.map(({ title, id, poster_path: posterPath }) => (
+          <MovieCard
+            key={id}
+            title={title}
+            id={id}
+            favorite={favoriteMovies?.some(fav => fav.id === id)}
+            posterPath={posterPath}
+          />
+        ))
       }
     </Wrapper>
   );

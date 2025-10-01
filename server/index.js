@@ -24,23 +24,23 @@ const getOptions = {
   }
 };
 
-// Home Route that makes trending movie api call
+// fetches trending movie data for home page
 app.get('/trending_movies', async (req, res) => {
   // url for trending movies of the week
-  const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US`
+  const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US`;
   // EXTRA TODO: add pagination -> prepend &page={num}
   // const trendingMoviesUrl = `${BASE_URL}/trending/movie/week?language=en-US&page=2`
 
   try {
-    const response = await fetch(trendingMoviesUrl, getOptions)
+    const response = await fetch(trendingMoviesUrl, getOptions);
     
     if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`)
+      throw new Error(`SERVER: Trending movies could not be fetched, error: ${response.status}`)
     }
 
-    const data = await response.json()
+    const data = await response.json();
 
-    res.json(data)
+    res.json(data);
   }
 
   catch (error) {
@@ -48,26 +48,25 @@ app.get('/trending_movies', async (req, res) => {
   }
 });
 
+// fetches individual movie data
 app.get('/movie/:movie_id', async (req, res) => {
-  const { params: { movie_id: movieId } } = req
-  console.log({movieId});
-  
+  const { params: { movie_id: movieId } } = req;
 
-  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=en-US`
+  const movieDetailsUrl = `${BASE_URL}/movie/${movieId}?language=en-US`;
 
   try {
-    const response = await fetch(movieDetailsUrl, getOptions)
+    const response = await fetch(movieDetailsUrl, getOptions);
 
     if (!response.ok) {
       throw new Error(`HTTP error: ${response.status}`)
     }
 
-    const data = await response.json()
+    const data = await response.json();
 
-    res.json(data)
+    res.json(data);
   }
   catch (error) {
-    console.error(error)
+    console.error(error);
   }
 });
 
