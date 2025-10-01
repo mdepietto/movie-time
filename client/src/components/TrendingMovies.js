@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import MovieCard from "./MovieCard";
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
@@ -15,19 +15,27 @@ const TrendingMovies = ({ favoriteMovies }) => {
   const [trendingMoviesData, setTrendingMoviesData] = useState();
 
   const fetchTrendingMovies = async () => {
-    try {
-      const response = await fetch('http://localhost:4040/trending_movies')
+    const cached = localStorage.getItem('trendingMovies');
+    
+    if (cached) {
+      setTrendingMoviesData(JSON.parse(cached));
+    } else {
+      try {
+        const response = await fetch('http://localhost:4040/trending_movies')
+  
+        if (!response.ok) {
+          throw new Error('Trending movies could not be fetched from the server')
+        }
+  
+        const data = await response.json()
+        
+        setTrendingMoviesData(data)
 
-      if (!response.ok) {
-        throw new Error('Trending movies could not be fetched from the server')
+        localStorage.setItem("trendingMovies", JSON.stringify(data));
       }
-
-      const data = await response.json()
-      
-      setTrendingMoviesData(data)
-    }
-    catch (error) {
-      console.error(error)
+      catch (error) {
+        console.error(error)
+      }
     }
   }
 

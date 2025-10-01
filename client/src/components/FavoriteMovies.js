@@ -15,6 +15,9 @@ const FavoriteMovies = ({ favoriteMovies }) => {
     <Wrapper>
       <Link to='/'>Home</Link>
       {
+        favoriteMovies.length === 0 && <h3>No favorite movies yet!</h3>
+      }
+      {
         favoriteMovies?.map(({ title, id, poster_path: posterPath }) => {
           return (
             <MovieCard

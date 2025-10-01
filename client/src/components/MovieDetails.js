@@ -59,13 +59,9 @@ const MovieDetails = ({ favoriteMovies, setFavoriteMovies }) => {
     let updated;
 
     if (favoriteMovies) {
-      if (favoriteMovies?.some(fav => fav.id === movieId)) {
-        console.log('already a favorite');
-        
-        updated = favoriteMovies?.filter(fav => fav.id !== movieId);
+      if (favoriteMovies?.some(fav => fav.id === Number(movieId))) {
+        updated = favoriteMovies?.filter(fav => fav.id !== Number(movieId));
       } else {
-        console.log('not already a favorite');
-        
         updated = [...favoriteMovies, movieDetails];
       }
   
